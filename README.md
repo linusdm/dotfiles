@@ -7,7 +7,7 @@
 ## usage
 
 ```sh
-git clone [git@github.com:linusdm/dotfiles.git]
+git clone git@github.com:linusdm/dotfiles.git
 cd ~/dotfiles
 
 # stow <package>
