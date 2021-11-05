@@ -1,11 +1,11 @@
-call plug#begin('~/.config/nvim/autoload/plugged')
+call plug#begin()
     Plug 'preservim/nerdtree'
     " elixir syntax highlighting
     Plug 'elixir-editors/vim-elixir'
     " color scheme
     Plug 'ayu-theme/ayu-vim'
     " dev icons
-    Plug 'ryanoasis/vim-devicons'
+    Plug 'kyazdani42/nvim-web-devicons'
     " elixir LSP
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/nvim-compe'
@@ -26,6 +26,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-fugitive'
 
     Plug 'mhinz/vim-mix-format'
+    Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 call plug#end()
 
 set hidden
@@ -38,10 +39,10 @@ set tabstop=2 " number of visual spaces per tab
 set softtabstop=2 " number of spaces in tab when editing
 set expandtab " tab to spaces
 
-set number " show line numbers
+set number relativenumber " show line numbers
 set cursorline " highlight current line
-set relativenumber
 set nowrap
+set path+=**
 
 set termguicolors " enable true colors support
 let ayucolor="mirage"
@@ -49,6 +50,12 @@ colorscheme ayu
 
 set showtabline=2 " always show tabs
 set laststatus=2 " always show a status line
+
+set foldmethod=syntax "syntax highlighting items specify folds  
+set foldcolumn=1 "defines 1 col at window left, to indicate folding  
+let javaScript_fold=1 "activate folding by JS syntax  
+let php_folding = 1
+set foldlevelstart=99 "start file with all folds opened
 
 let test#strategy = "floaterm"
 let g:floaterm_keymap_toggle = '<F6>'
