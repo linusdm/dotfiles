@@ -1,68 +1,72 @@
--- Adapted from https://www.mitchellhanberg.com/how-to-set-up-neovim-for-elixir-development/
-
 local lspconfig = require("lspconfig")
+
+local buf_map = function(bufnr, mode, lhs, rhs, opts)
+    vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
+        silent = true,
+    })
+end
+
+local on_attach = function(client, bufnr)
+    vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
+    vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting()")
+    vim.cmd("command! LspCodeAction lua vim.lsp.buf.code_action()")
+    vim.cmd("command! LspHover lua vim.lsp.buf.hover()")
+    vim.cmd("command! LspRename lua vim.lsp.buf.rename()")
+    vim.cmd("command! LspRefs lua vim.lsp.buf.references()")
+    vim.cmd("command! LspTypeDef lua vim.lsp.buf.type_definition()")
+    vim.cmd("command! LspImplementation lua vim.lsp.buf.implementation()")
+    vim.cmd("command! LspDiagPrev lua vim.lsp.diagnostic.goto_prev()")
+    vim.cmd("command! LspDiagNext lua vim.lsp.diagnostic.goto_next()")
+    vim.cmd("command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()")
+    vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
+    buf_map(bufnr, "n", "gd", ":LspDef<CR>")
+    buf_map(bufnr, "n", "gr", ":LspRename<CR>")
+    buf_map(bufnr, "n", "gy", ":LspTypeDef<CR>")
+    buf_map(bufnr, "n", "K", ":LspHover<CR>")
+    buf_map(bufnr, "n", "[a", ":LspDiagPrev<CR>")
+    buf_map(bufnr, "n", "]a", ":LspDiagNext<CR>")
+    buf_map(bufnr, "n", "ga", ":LspCodeAction<CR>")
+    buf_map(bufnr, "n", "<Leader>a", ":LspDiagLine<CR>")
+    buf_map(bufnr, "i", "<C-x><C-x>", "<cmd> LspSignatureHelp<CR>")
+
+    if client.resolved_capabilities.document_formatting then
+        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+    end
+
+    if client.resolved_capabilities.completion then
+        vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
+    end
+end
+
+lspconfig.tsserver.setup({
+    on_attach = function(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+        local ts_utils = require("nvim-lsp-ts-utils")
+        ts_utils.setup({
+            eslint_bin = "eslint_d",
+            eslint_enable_diagnostics = true,
+            eslint_enable_code_actions = true,
+            enable_formatting = true,
+            formatter = "prettier",
+        })
+        ts_utils.setup_client(client)
+        buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
+        buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
+        buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
+        on_attach(client, bufnr)
+    end,
+})
+
+require("null-ls").config({})
+lspconfig["null-ls"].setup({ on_attach = on_attach })
+
+-- Adapted from https://www.mitchellhanberg.com/how-to-set-up-neovim-for-elixir-development/
 
 -- Neovim doesn't support snippets out of the box, so we need to mutate the
 -- capabilities we send to the language server to let them know we want snippets.
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
--- Setup our autocompletion. These configuration options are the default ones
--- copied out of the documentation.
-require "compe".setup {
-  enabled = true,
-  autocomplete = true,
-  debug = false,
-  min_length = 1,
-  preselect = "disabled",
-  throttle_time = 80,
-  source_timeout = 200,
-  incomplete_delay = 400,
-  max_abbr_width = 100,
-  max_kind_width = 100,
-  max_menu_width = 100,
-  documentation = true,
-  source = {
-    path = true,
-    buffer = true,
-    calc = true,
-    vsnip = true,
-    nvim_lsp = true,
-    nvim_lua = true,
-    spell = true,
-    tags = true,
-    treesitter = true
-  }
-}
-
-local on_attach = function(_, bufnr)
-  local function map(...)
-    vim.api.nvim_buf_set_keymap(bufnr, ...)
-  end
-  local map_opts = {noremap = true, silent = true}
-
-  -- map("n", "df", "<cmd>lua vim.lsp.buf.formatting()<cr>", map_opts)
-  map("n", "gd", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", map_opts)
-  -- map("n", "dt", "<cmd>lua vim.lsp.buf.definition()<cr>", map_opts)
-  map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
-  map("n", "gD", "<cmd>lua vim.lsp.buf.implementation()<cr>", map_opts)
-  -- map("n", "<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", map_opts)
-  map("n", "1gD", "<cmd>lua vim.lsp.buf.type_definition()<cr>", map_opts)
-
-  vim.cmd [[imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']]
-  vim.cmd [[smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']]
-
-  vim.cmd [[imap <expr> <Tab> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>']]
-  vim.cmd [[smap <expr> <Tab> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>']]
-  vim.cmd [[imap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>']]
-  vim.cmd [[smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>']]
-
-  vim.cmd [[inoremap <silent><expr> <C-Space> compe#complete()]]
-  vim.cmd [[inoremap <silent><expr> <CR> compe#confirm('<CR>')]]
-  vim.cmd [[inoremap <silent><expr> <C-e> compe#close('<C-e>')]]
-  vim.cmd [[inoremap <silent><expr> <C-f> compe#scroll({ 'delta': +4 })]]
-  vim.cmd [[inoremap <silent><expr> <C-d> compe#scroll({ 'delta': -4 })]]
-end
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local path_to_elixirls = vim.fn.expand("~/elixir-ls/rel/language_server.sh")
 
@@ -78,8 +82,3 @@ lspconfig.elixirls.setup({
   }
 })
 
-lspconfig.efm.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  filetypes = {"elixir"}
-})
