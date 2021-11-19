@@ -1,18 +1,13 @@
 call plug#begin()
     Plug 'preservim/nerdtree'
-    " elixir syntax highlighting
-    Plug 'elixir-editors/vim-elixir'
-    " color scheme
     Plug 'ayu-theme/ayu-vim'
-    " dev icons
     Plug 'kyazdani42/nvim-web-devicons'
-    " elixir LSP
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'hrsh7th/nvim-compe'
-    Plug 'hrsh7th/vim-vsnip'
-    Plug 'hrsh7th/vim-vsnip-integ'
-
     Plug 'nvim-lua/plenary.nvim'
+
+    Plug 'elixir-editors/vim-elixir' " elixir syntax highlighting
+
+    Plug 'neovim/nvim-lspconfig'
+
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
@@ -20,13 +15,16 @@ call plug#begin()
     Plug 'nvim-treesitter/playground'
 
     Plug 'vim-test/vim-test'
-    Plug 'voldikss/vim-floaterm'
     Plug 'airblade/vim-gitgutter'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-fugitive'
+    " Plug 'tpope/vim-surround'
+    " Plug 'tpope/vim-fugitive'
 
-    Plug 'mhinz/vim-mix-format'
-    Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+    Plug 'pangloss/vim-javascript'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'maxmellon/vim-jsx-pretty'
+
+    Plug 'jose-elias-alvarez/null-ls.nvim'
+    Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 call plug#end()
 
 set hidden
@@ -54,13 +52,9 @@ set laststatus=2 " always show a status line
 set foldmethod=syntax "syntax highlighting items specify folds  
 set foldcolumn=1 "defines 1 col at window left, to indicate folding  
 let javaScript_fold=1 "activate folding by JS syntax  
-let php_folding = 1
 set foldlevelstart=99 "start file with all folds opened
 
-let test#strategy = "floaterm"
-let g:floaterm_keymap_toggle = '<F6>'
-let g:floaterm_width = 0.9
-let g:floaterm_height = 0.9
+let test#strategy = "neovim"
 
 nnoremap <F5> :NERDTreeToggle<cr>
 
@@ -79,7 +73,4 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-nnoremap <leader>p <cmd>MixFormat<cr>
-let g:mix_format_on_save = 1
-
-lua require("lsp")
+lua require("lsp-ts")
