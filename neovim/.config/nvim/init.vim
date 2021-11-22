@@ -55,6 +55,7 @@ let javaScript_fold=1 "activate folding by JS syntax
 set foldlevelstart=99 "start file with all folds opened
 
 let test#strategy = "neovim"
+let mapleader = " "
 
 nnoremap <F5> :NERDTreeToggle<cr>
 
