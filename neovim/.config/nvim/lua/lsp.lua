@@ -49,6 +49,9 @@ lspconfig.tsserver.setup({
             eslint_enable_code_actions = true,
             enable_formatting = true,
             formatter = "prettier",
+            -- filter out message "File is a CommonJS module; it may be converted to an ES6 module."
+            -- for other codes see: https://github.com/microsoft/TypeScript/blob/master/src/compiler/diagnosticMessages.json
+            filter_out_diagnostics_by_code = { 80001 },
         })
         ts_utils.setup_client(client)
         buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
