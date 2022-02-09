@@ -71,7 +71,7 @@ lspconfig["null-ls"].setup({ on_attach = on_attach })
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local path_to_elixirls = vim.fn.expand("~/elixir-ls/rel/language_server.sh")
+local path_to_elixirls = vim.fn.expand("~/elixir-ls/release/language_server.sh")
 
 lspconfig.elixirls.setup({
   cmd = {path_to_elixirls},

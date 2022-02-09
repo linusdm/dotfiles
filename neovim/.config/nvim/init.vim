@@ -25,6 +25,8 @@ call plug#begin()
 
     Plug 'jose-elias-alvarez/null-ls.nvim'
     Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+
+    Plug 'ruanyl/vim-gh-line'
 call plug#end()
 
 set hidden
@@ -73,5 +75,15 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+
+lua << EOF
+  require('telescope').setup{
+    defaults = {
+      file_ignore_patterns = {"node_modules", "javascripts", "stylesheets", "dist", "build", "yarn.lock"}
+    }
+  }
+EOF
 
 lua require("lsp")
