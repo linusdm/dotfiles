@@ -88,8 +88,7 @@ lvim.builtin.treesitter.ensure_installed = {
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.highlight.enable = true
-lvim.builtin.treesitter.rainbow.enable = true
+-- lvim.builtin.treesitter.highlight.enable = true
 
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Test",
@@ -190,8 +189,7 @@ end
 -- }
 lvim.plugins = {
   { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end },
-  { "vim-test/vim-test" },
-  { "p00f/nvim-ts-rainbow" },
+  --  { "vim-test/vim-test" },
   { "christoomey/vim-tmux-runner" },
   { 'alexghergh/nvim-tmux-navigation', config = function()
     local nvim_tmux_nav = require('nvim-tmux-navigation')
