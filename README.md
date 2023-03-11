@@ -2,21 +2,39 @@
 
 ## requirements
 
-- GNU stow, available on all platforms
+- [rcm](https://github.com/thoughtbot/rcm)
 
 ## usage
 
 ```sh
-git clone git@github.com:linusdm/dotfiles.git
-cd ~/dotfiles
+git clone git@github.com:linusdm/dotfiles.git ~/dotfiles-linus
 
-# stow <package>
-stow neovim
+lsrc -d ~/dotfiles-linus -x README.md
+rcup -d ~/dotfiles-linus -x README.md
+rcdn -d ~/dotfiles-linus -x README.md
 ```
 
-## requirements for neovim
+Options can be omitted if an ~/.rcrc files is configured correctly.
 
-Neovim will start with errors when no plugins are installed yet. Do `:PlugInstall` and restart nvim to fix these errors.
+```
+DOTFILES_DIRS="~/dotfiles-linus"
+EXCLUDES="README.md"
+```
 
-- neovim 0.5.1
-- [elixir-ls](https://github.com/elixir-lsp/elixir-ls) (installed at `~/elixir-ls/rel`, see [this reference](neovim/.config/nvim/lua/lsp.lua#L67))
+## Neovim TODO
+
+- [x] package manager: lazy.nvim
+- [ ] status line
+- [x] bufferline
+- [ ] git gutter + actions (gitsigns?)
+- [ ] autocomplete
+- [ ] LSP
+- [ ] vim-test
+- [x] treesitter
+- [x] tmux navigation
+- [ ] filetree
+- [x] telescope / FZF
+- [ ] projectionist
+- [ ] do/end text objects
+- [ ] better contrast line numbers (tokyonight theme?)
+- [ ] comment with 'gcc'
