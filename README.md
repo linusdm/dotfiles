@@ -35,6 +35,9 @@ EXCLUDES="README.md"
 - [ ] filetree
 - [x] telescope / FZF
 - [ ] projectionist
+- [ ] [vim dispatch](https://github.com/tpope/vim-dispatch)
+- [ ] [vim makery](https://github.com/igemnace/vim-makery)
+- [x] [vim surround](https://github.com/tpope/vim-surround)
 - [ ] do/end text objects
 - [ ] better contrast line numbers (tokyonight theme?)
 - [ ] comment with 'gcc'
