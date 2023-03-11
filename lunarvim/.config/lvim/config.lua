@@ -85,6 +85,8 @@ lvim.builtin.treesitter.ensure_installed = {
   "java",
   "yaml",
   "heex",
+  "elixir",
+  "eex",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -189,22 +191,26 @@ end
 -- }
 lvim.plugins = {
   { "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end },
-  --  { "vim-test/vim-test" },
+  { "tpope/vim-dispatch" },
+  { "tpope/vim-surround" },
+  { "vim-test/vim-test" },
   { "christoomey/vim-tmux-runner" },
-  { 'alexghergh/nvim-tmux-navigation', config = function()
-    local nvim_tmux_nav = require('nvim-tmux-navigation')
+  {
+    'alexghergh/nvim-tmux-navigation',
+    config = function()
+      local nvim_tmux_nav = require('nvim-tmux-navigation')
 
-    nvim_tmux_nav.setup {
-      disable_when_zoomed = true -- defaults to false
-    }
+      nvim_tmux_nav.setup {
+        disable_when_zoomed = true -- defaults to false
+      }
 
-    vim.keymap.set('n', "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
-    vim.keymap.set('n', "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
-    vim.keymap.set('n', "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
-    vim.keymap.set('n', "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
-    vim.keymap.set('n', "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
-    vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
-  end
+      vim.keymap.set('n', "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+      vim.keymap.set('n', "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+      vim.keymap.set('n', "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+      vim.keymap.set('n', "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
+      vim.keymap.set('n', "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
+      vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
+    end
   }
 }
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
