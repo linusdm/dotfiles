@@ -19,9 +19,11 @@ return {
       vim.cmd.colorscheme("tokyonight")
     end,
   },
-  "folke/which-key.nvim",
+  -- "folke/which-key.nvim",
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = true,
+    event = { "BufReadPost", "BufNewFile" },
     build = ":TSUpdate",
     opts = {
       -- A list of parser names, or "all" (the five initial parsers should always be installed)
