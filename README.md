@@ -32,7 +32,7 @@ EXCLUDES="README.md"
 - [x] filetree
 - [x] [vim surround](https://github.com/tpope/vim-surround)
 - [x] better contrast line numbers (tokyonight theme?)
-- [ ] git gutter + actions (gitsigns?) / jump to next/prev hunk
+- [x] git gutter + actions (gitsigns?) / jump to next/prev hunk
 - [ ] autocomplete
 - [ ] status line
 - [ ] vim-test
