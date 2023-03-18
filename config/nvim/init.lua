@@ -44,4 +44,7 @@ require("lazy").setup("plugins", {
   install = {
     colorscheme = { "tokyonight" },
   },
+  change_detection = {
+    notify = false,
+  },
 })
