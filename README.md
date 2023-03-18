@@ -34,9 +34,9 @@ EXCLUDES="README.md"
 - [x] better contrast line numbers (tokyonight theme?)
 - [x] git gutter + actions (gitsigns?) / jump to next/prev hunk
 - [x] comment with 'gcc'
-- [ ] autocomplete
-- [ ] status line
-- [ ] vim-test
+- [x] vim-test
+- [ ] lualine
+- [ ] cmp (autocomplete)
 - [ ] projectionist
 - [ ] [vim dispatch](https://github.com/tpope/vim-dispatch)
 - [ ] [vim makery](https://github.com/igemnace/vim-makery)
