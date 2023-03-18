@@ -33,10 +33,10 @@ EXCLUDES="README.md"
 - [x] [vim surround](https://github.com/tpope/vim-surround)
 - [x] better contrast line numbers (tokyonight theme?)
 - [x] git gutter + actions (gitsigns?) / jump to next/prev hunk
+- [x] comment with 'gcc'
 - [ ] autocomplete
 - [ ] status line
 - [ ] vim-test
-- [ ] comment with 'gcc'
 - [ ] projectionist
 - [ ] [vim dispatch](https://github.com/tpope/vim-dispatch)
 - [ ] [vim makery](https://github.com/igemnace/vim-makery)
