@@ -37,16 +37,23 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   {
-    "sainnhe/everforest",
+    "folke/tokyonight.nvim",
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
-    init = function()
-      vim.opt.termguicolors = true
-    end,
     config = function()
-      vim.g.everforest_background = "hard"
-      vim.g.everforest_ui_contrast = "low"
-      vim.cmd.colorscheme("everforest")
+      require("tokyonight").setup {
+        -- make the line number brighter
+        on_highlights = function(highlights, colors)
+          highlights.LineNr = {
+            fg = highlights.CursorLineNr.fg,
+          }
+          highlights.CursorLineNr = {
+            fg = colors.orange,
+            bold = true,
+          }
+        end,
+      }
+      vim.cmd.colorscheme("tokyonight")
     end,
   },
   "folke/which-key.nvim",
@@ -171,6 +178,6 @@ require("lazy").setup({
   { "tpope/vim-surround", event = { "BufReadPost", "BufNewFile" } },
 }, {
   install = {
-    colorscheme = { "everforest" },
+    colorscheme = { "tokyonight" },
   },
 })
