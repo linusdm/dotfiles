@@ -35,6 +35,7 @@ EXCLUDES="README.md"
 - [x] git gutter + actions (gitsigns?) / jump to next/prev hunk
 - [x] comment with 'gcc'
 - [x] vim-test
+- [ ] lua_ls
 - [ ] lualine
 - [ ] cmp (autocomplete)
 - [ ] projectionist
