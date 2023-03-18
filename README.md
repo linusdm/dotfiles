@@ -24,20 +24,20 @@ EXCLUDES="README.md"
 ## Neovim TODO
 
 - [x] package manager: lazy.nvim
-- [ ] status line
 - [x] bufferline
-- [ ] git gutter + actions (gitsigns?)
-- [ ] autocomplete
-- [ ] LSP
-- [ ] vim-test
+- [x] LSP
 - [x] treesitter
 - [x] tmux navigation
-- [ ] filetree
 - [x] telescope / FZF
+- [x] filetree
+- [x] [vim surround](https://github.com/tpope/vim-surround)
+- [x] better contrast line numbers (tokyonight theme?)
+- [ ] git gutter + actions (gitsigns?) / jump to next/prev hunk
+- [ ] autocomplete
+- [ ] status line
+- [ ] vim-test
+- [ ] comment with 'gcc'
 - [ ] projectionist
 - [ ] [vim dispatch](https://github.com/tpope/vim-dispatch)
 - [ ] [vim makery](https://github.com/igemnace/vim-makery)
-- [x] [vim surround](https://github.com/tpope/vim-surround)
 - [ ] do/end text objects
-- [ ] better contrast line numbers (tokyonight theme?)
-- [ ] comment with 'gcc'

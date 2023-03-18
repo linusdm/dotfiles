@@ -13,6 +13,8 @@ vim.opt.undodir = vim.fn.expand("~/.tmp")
 
 vim.opt.clipboard = "unnamedplus"
 
+vim.opt.termguicolors = true
+
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
 vim.keymap.set("n", "<Leader>h", "<cmd>nohlsearch<cr>")
