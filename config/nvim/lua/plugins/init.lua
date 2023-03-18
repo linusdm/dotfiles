@@ -21,16 +21,6 @@ return {
   },
   "folke/which-key.nvim",
   {
-    "akinsho/bufferline.nvim",
-    version = "v3.x",
-    config = function(_, opts)
-      require("bufferline").setup {}
-      vim.keymap.set("n", "<S-l>", ":BufferLineCycleNext<cr>")
-      vim.keymap.set("n", "<S-h>", ":BufferLineCyclePrev<cr>")
-    end,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
-  {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     opts = {

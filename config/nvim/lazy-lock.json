@@ -2,6 +2,7 @@
   "bufferline.nvim": { "branch": "main", "commit": "b337fd393cef2e3679689d220e2628722c20ddcb" },
   "elixir.nvim": { "branch": "main", "commit": "422a79ebeceed3d45cdcc4b09f2be43635a477d0" },
   "lazy.nvim": { "branch": "main", "commit": "5b4444f0d7e556deba3f7ca949a2ba0e2c3369fb" },
+  "nvim-tree.lua": { "branch": "master", "commit": "1d79a64a88af47ddbb55f4805ab537d11d5b908e" },
   "nvim-treesitter": { "branch": "master", "commit": "0ec25f87ee89ceca1ddefdb62c9702357749ba5a" },
   "nvim-treesitter-context": { "branch": "master", "commit": "982bd8ada275a2285b71264d666b9469d6df8e84" },
   "nvim-treesitter-refactor": { "branch": "master", "commit": "75f5895cc662d61eb919da8050b7a0124400d589" },
